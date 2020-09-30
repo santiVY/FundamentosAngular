@@ -1,0 +1,23 @@
+<h1>Hola mundo {{title}}</h1>
+
+<input type="text" [(ngModel)]="title"/>
+
+<br><br>
+
+<div *ngIf="title == 'Juan'; else notJuan ">
+  Confirmado, es Juan! 
+</div>
+
+<ng-template #notJuan>
+  No, no es juan :(
+</ng-template>
+
+<ul>
+  <li *ngFor="let variableAnimal of animales">{{variableAnimal}}</li>
+</ul>
+
+<div [ngSwitch]='title'>
+  <p *ngSwitchCase="'Juan'">Confirmado, es Juan!</p>
+  <p *ngSwitchCase="'Santiago'">Confirmado, es Santiago!</p>
+  <p *ngSwitchDefault>No no es juan</p>
+</div>
