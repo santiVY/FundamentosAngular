@@ -1,0 +1,8 @@
+<section>
+    <!-- <img src={{experience.image}} width="140%" alt="foto"> -->
+    <img [src]="experience.image" width="140%" alt="foto">
+    <h3>{{experience.description}}</h3>
+    <p>{{experience.place}}</p>
+    <h6>COP {{experience.price}}</h6>
+    <button (click)="showDetail()">Ver detalles</button>
+</section>

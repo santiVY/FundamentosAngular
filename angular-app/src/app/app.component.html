@@ -1,6 +1,8 @@
 <h1>Hola mundo {{title}}</h1>
 
-<input type="text" [(ngModel)]="title"/>
+<input type="text" [(ngModel)]="animal"/>
+
+<button (click)="addAnimal()"> Agregar animal </button>
 
 <br><br>
 
@@ -13,11 +15,27 @@
 </ng-template>
 
 <ul>
-  <li *ngFor="let variableAnimal of animales">{{variableAnimal}}</li>
+  <li *ngFor="let variableAnimal of animales; index as i">
+    {{variableAnimal}} <button (click)="removeAnimal(i)">Eliminar</button>
+  </li>
 </ul>
 
 <div [ngSwitch]='title'>
   <p *ngSwitchCase="'Juan'">Confirmado, es Juan!</p>
   <p *ngSwitchCase="'Santiago'">Confirmado, es Santiago!</p>
   <p *ngSwitchDefault>No no es juan</p>
+</div>
+
+<ul *ngFor="let ani of animales" [ngSwitch]="ani">
+  <li *ngSwitchCase="'Gato'">Esto es un: {{ani}}</li>
+  <li *ngSwitchCase="'Perro'">Esto es un: {{ani}}</li>
+  <li *ngSwitchCase="'Pato'">Esto es un: {{ani}}</li>
+  <li *ngSwitchDefault>No se reconoce el animal</li>
+</ul>
+
+<hr>
+La experiencia seleccionada es: {{idExperience}}
+<hr>
+<div *ngFor="let exp of experiences">
+  <experience-app (expSelected)="experienceChoise($event)" [experience]="exp"></experience-app>
 </div>
