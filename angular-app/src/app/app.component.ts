@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { IExperience } from './experience.model';
 
 @Component({
@@ -7,9 +7,23 @@ import { IExperience } from './experience.model';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnChanges, OnInit{
+
+  constructor(){
+    console.log('Constructor ejecutado...');
+  }
+
+  ngOnChanges(){
+    console.log('onChanges ejecutado...');
+  }
+
+  ngOnInit() {
+    console.log('onInit ejecutado..')
+  }
+
   title = 'Juan';
   animal: string = '';
+  creditCard: string = '4567-9890-0908-0998';
 
   animales: string[] = [
     'Perro',
@@ -27,35 +41,40 @@ export class AppComponent {
         image: 'https://a0.muscache.com/im/pictures/f3f1ac58-66b0-4d52-b754-a3b112431e52.jpg',
         description: 'Casa de descando',
         place: 'Santa Elena',
-        price: '300.000'
+        price: '300.000',
+        score: 3
     },
     {
         id: 2,
         image: 'https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/08/3a/bd/fe.jpg',
         description: 'Parapente',
         place: 'Chicamocha',
-        price: '400.000'
+        price: '400.000',
+        score: 1
     },
     {
         id: 3,
         image: 'https://i2.wp.com/parquestematicos.com/wp-content/uploads/2020/01/disneylandpark2020.jpeg',
         description: 'Disney Fotos',
         place: 'Cali',
-        price: '500.000'
+        price: '500.000',
+        score: 5
     },
     {
         id: 4,
         image: 'https://miro.medium.com/max/2560/1*_bfBYAoHLR3WsLWhLenw0A.jpeg',
         description: 'Glamping',
         place: 'Retiro',
-        price: '600.000'
+        price: '600.000',
+        score: 1
     },
     {
         id: 5,
         image: 'https://img.freepik.com/foto-gratis/hermosa-playa-tropical-mar-palmera-coco-isla-paradisiaca_74190-2206.jpg',
         description: 'Vacaciones en plata',
         place: 'Capuganá',
-        price: '30.000'
+        price: '30.000',
+        score: 1
     }
 ];
 

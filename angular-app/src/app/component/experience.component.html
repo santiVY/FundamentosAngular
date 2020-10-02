@@ -2,7 +2,9 @@
     <!-- <img src={{experience.image}} width="140%" alt="foto"> -->
     <img [src]="experience.image" width="140%" alt="foto">
     <h3>{{experience.description}}</h3>
-    <p>{{experience.place}}</p>
+    <p>{{experience.place | uppercase}}</p>
     <h6>COP {{experience.price}}</h6>
+    <h6>{{ tax | percent }}</h6>
+    <score-app [score]="experience.score"></score-app>
     <button (click)="showDetail()">Ver detalles</button>
 </section>

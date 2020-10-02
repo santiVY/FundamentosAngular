@@ -4,4 +4,5 @@ export interface IExperience {
     description: string;
     place: string;
     price?: string;
+    score: number;
 }

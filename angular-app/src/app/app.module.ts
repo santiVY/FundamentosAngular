@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ExperienceComponent } from './component/experience.component';
+import { CardmaskPipe } from './cardmask.pipe';
+import { ScoreComponent } from './score/score.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExperienceComponent
+    ExperienceComponent,
+    CardmaskPipe,
+    ScoreComponent
   ],
   imports: [
     BrowserModule,
