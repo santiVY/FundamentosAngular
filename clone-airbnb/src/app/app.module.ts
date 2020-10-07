@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { BookingComponent } from './booking/components/booking/booking.component';
 import { SigninComponent } from './signin/components/signin/signin.component';
 import { SignupComponent } from './signup/components/signup/signup.component'
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SignupComponent } from './signup/components/signup/signup.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
