@@ -1,1 +1,6 @@
-<p>score works!</p>
+<section>
+    <div *ngFor="let space of spaces">
+        <span *ngIf="space <= score"><i class="material-icons">star</i></span>
+        <span *ngIf="space > score"><i class="material-icons">star_outline</i></span>
+    </div>
+</section>
