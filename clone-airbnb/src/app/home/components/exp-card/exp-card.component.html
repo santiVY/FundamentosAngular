@@ -1,10 +1,12 @@
-<div class="exp-card">
-    <div class="image">
-        <img [src]="experiencie.image" alt="">
+<a [routerLink]="['/detail/' + experiencie.id]">
+    <div class="exp-card">
+        <div class="image">
+            <img [src]="experiencie.image" alt="">
+        </div>
+        <div class="content">
+            <h3>{{experiencie.description}}</h3>
+            <h4>{{experiencie.place}}</h4>
+            <app-score [score]="experiencie.score"></app-score>
+        </div>
     </div>
-    <div class="content">
-        <h3>{{experiencie.description}}</h3>
-        <h4>{{experiencie.place}}</h4>
-        <app-score [score]="experiencie.score"></app-score>
-    </div>
-</div>
+</a>

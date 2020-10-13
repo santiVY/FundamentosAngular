@@ -9,6 +9,8 @@ import { BookingComponent } from './booking/components/booking/booking.component
 import { SigninComponent } from './signin/components/signin/signin.component';
 import { SignupComponent } from './signup/components/signup/signup.component'
 import { HomeModule } from './home/home.module';
+import { DetailModule } from './detail/detail.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    HomeModule
+    HomeModule,
+    DetailModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
