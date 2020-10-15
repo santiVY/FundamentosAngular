@@ -54,7 +54,7 @@ export class ExperienceService {
     return this.experiences;
   }
 
-  public gerExperienceById(id: number): IExperience {
+  public getExperienceById(id: number): IExperience {
     return this.experiences.find(item => item.id === id);
   }
 }

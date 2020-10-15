@@ -1,0 +1,13 @@
+<section>
+    <form [formGroup]="formGroupBooking" class="form">
+        <div class="control-form">
+            <label>Fecha:</label>
+            <input formControlName="date" type="date" name="date">
+        </div>
+        <div class="control-form">
+            <label>Descripción:</label>
+            <textarea formControlName="description" name="description"></textarea>
+        </div>
+        <button (click)="booking()" [disabled]="formGroupBooking.invalid">Rerservar</button>
+    </form>
+</section>

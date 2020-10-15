@@ -5,19 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared/shared.module';
-import { BookingComponent } from './booking/components/booking/booking.component';
-import { SigninComponent } from './signin/components/signin/signin.component';
-import { SignupComponent } from './signup/components/signup/signup.component'
 import { HomeModule } from './home/home.module';
 import { DetailModule } from './detail/detail.module';
 import { RouterModule } from '@angular/router';
+import { SignupModule } from './signup/signup.module';
+import { SigninModule } from './signin/signin.module';
+import { BookingModule } from './booking/booking.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BookingComponent,
-    SigninComponent,
-    SignupComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +22,10 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     HomeModule,
     DetailModule,
-    RouterModule
+    RouterModule,
+    SignupModule,
+    SigninModule,
+    BookingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

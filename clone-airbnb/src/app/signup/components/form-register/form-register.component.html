@@ -1,0 +1,21 @@
+<section>
+    <form [formGroup]="formGroupRegister" class="form">
+        <div class="control-form">
+            <label>Nombre:</label>
+            <input formControlName="name" type="text" name="nameText">
+        </div>
+        <div class="control-form">
+            <label>Teléfono:</label>
+            <input formControlName="phone" type="tel" name="phoneText">
+        </div>
+        <div class="control-form">
+            <label>Correo:</label>
+            <input formControlName="email" type="emial" name="emailText">
+        </div>
+        <div class="control-form">
+            <label>contraseña:</label>
+            <input formControlName="password" type="password" name="passwordText">
+        </div>
+        <button (click)="register()" [disabled]="formGroupRegister.invalid">Registrarme</button>
+    </form>
+</section>
