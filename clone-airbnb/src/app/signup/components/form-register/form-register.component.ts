@@ -1,6 +1,6 @@
-import { error } from '@angular/compiler/src/util';
+
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, ControlContainer, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-register',
