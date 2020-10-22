@@ -5,13 +5,14 @@ import { catchError, retry } from 'rxjs/operators'
 import { IExperiencesTopFiveResponse } from 'src/app/shared/models/experiencesTopFiveResponse.model';
 import { IExperiencesResponse } from 'src/app/shared/models/experiencesResponse.model';
 import { IExperiencesDetailResponse } from 'src/app/shared/models/experiencesDetailResponse.model';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExperienceService {
 
-  private urlAPI: string = 'https://bankairbnbapp.herokuapp.com';
+  private urlAPI: string = environment.urlBase;
   
   constructor(private httpClient: HttpClient) { }
 

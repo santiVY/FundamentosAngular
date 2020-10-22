@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExperienceService } from 'src/app/services/experience/experience.service';
 import { IExperience } from 'src/app/shared/models/experiences.model';
-import { IExperiencesResponse } from 'src/app/shared/models/experiencesResponse.model';
 
 @Component({
   selector: 'app-exp-list',
