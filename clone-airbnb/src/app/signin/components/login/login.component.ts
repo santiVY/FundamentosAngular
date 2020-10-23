@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public formGroupLogin: FormGroup;
-  public userLogin: IUserLoginResponse;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
     const data: IUser = this.formGroupLogin.value;
     this.userService.login(data).subscribe(
       response => {
-        this.userLogin = response;
         if (response.status === 1 ) {
           console.log('Usuario autenticado')
           localStorage.setItem('Token', response.token);
@@ -44,7 +42,7 @@ export class LoginComponent implements OnInit {
         } 
         console.log('Informacion del login', response);
       }
-    )
+    );
   }
 
 

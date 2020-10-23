@@ -1,15 +1,20 @@
 <section>
     <form [formGroup]="formGroupBooking" class="form">
         <div class="control-form">
-            <label>Fecha:</label>
-            <input formControlName="date" type="date" name="date">
+            <label>Fecha inicio:</label>
+            <input formControlName="booking_date_start" type="date" name="booking_date_start">
         </div>
-        <span class="error"> {{ getError('date') }} </span>
+        <span class="error"> {{ getError('booking_date_start') }} </span>
         <div class="control-form">
-            <label>Descripción:</label>
-            <textarea formControlName="description" name="description"></textarea>
+            <label>Fecha fin:</label>
+            <input formControlName="booking_date_end" type="date" name="booking_date_end">
         </div>
-        <span class="error"> {{ getError('description') }} </span>
-        <button (click)="booking()" [disabled]="formGroupBooking.invalid">Rerservar</button>
+        <span class="error"> {{ getError('booking_date_end') }} </span>
+        <div class="control-form">
+            <label>Comentarios:</label>
+            <textarea formControlName="comments" name="comments"></textarea>
+        </div>
+        <span class="error"> {{ getError('comments') }} </span>
+        <button (click)="bookingNow()" [disabled]="formGroupBooking.invalid">Reservar</button>
     </form>
 </section>

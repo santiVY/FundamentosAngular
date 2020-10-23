@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/models/user.model';
 import { IUserRegisterResponse } from 'src/app/shared/models/userRegisterResponse.model';
 import { UserService } from '../../../services/users/users.service'
@@ -17,7 +18,8 @@ export class FormRegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -79,6 +81,7 @@ export class FormRegisterComponent implements OnInit {
     const data: IUser = this.formGroupRegister.value;
       this.userService.addUser(data).subscribe(response => {
         this.userRegister = response;
+        this.router.navigate(['/signin']);
         console.log('Datos de registro ', response) 
     });
   }

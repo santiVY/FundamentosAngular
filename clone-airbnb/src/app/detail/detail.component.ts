@@ -25,6 +25,7 @@ export class DetailComponent implements OnInit {
   private getParams(): void {
     this.route.params.subscribe(params => {
       const id = params.id;
+      localStorage.setItem("experiences_id", id);
       this.experienceService.getExperienceById(id).subscribe(response => {
         this.experience = response.experience
       });

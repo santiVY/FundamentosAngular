@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { BookingService } from 'src/app/services/booking/booking.service';
+import { IBooking } from 'src/app/shared/models/booking.model';
 
 @Component({
   selector: 'app-form-booking',
@@ -10,7 +13,10 @@ export class FormBookingComponent implements OnInit {
 
   public formGroupBooking: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private bookingService: BookingService
+    ) { }
 
   ngOnInit(): void {
     this.formBookingInit();
@@ -18,14 +24,10 @@ export class FormBookingComponent implements OnInit {
 
   private formBookingInit():void {
     this.formGroupBooking = this.formBuilder.group({
-      date: ['', [Validators.required, this.validateDate]],
-      description: ['', Validators.required]
+      booking_date_start: ['', [Validators.required, this.validateDate]],
+      booking_date_end: ['', [Validators.required, this.validateDate]],
+      comments: ['', Validators.required]
     });
-  }
-
-  public booking(): void {
-    const data = this.formGroupBooking.value;
-    console.log('Informacion de reserva ', data);
   }
 
   public validateDate(control: AbstractControl){
@@ -41,7 +43,6 @@ export class FormBookingComponent implements OnInit {
         parseInt(arrayDate[2]) < dateNow.getDate()) {
         errors = { dateError: 'La fecha debe ser mayor o igual a la fecha actual'};
     }
-
 
     return errors;
   }
@@ -69,7 +70,20 @@ export class FormBookingComponent implements OnInit {
     return errorMessage;
   }
 
-
+  public bookingNow(): void {
+    const data: IBooking = this.formGroupBooking.value;
+    data.experience_id = localStorage.getItem("experiences_id");
+    this.bookingService.postBooking(data).subscribe(
+       response => {
+         if(response.status === 1){
+            alert('Reserva exitosa');
+            console.log('reserva exitosa', response);
+         }else{
+           alert('token no valido');
+         }
+       }
+     );
+  }
 
 
 }
