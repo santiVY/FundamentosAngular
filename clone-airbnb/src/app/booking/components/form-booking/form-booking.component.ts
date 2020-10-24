@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BookingService } from 'src/app/services/booking/booking.service';
 import { IBooking } from 'src/app/shared/models/booking.model';
 
@@ -14,7 +15,8 @@ export class FormBookingComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -105,6 +107,7 @@ export class FormBookingComponent implements OnInit {
          if(response.status === 1){
             alert('Reserva exitosa');
             console.log('reserva exitosa', response);
+            this.router.navigate(['/home']);
          }else{
            alert('token no valido');
          }
