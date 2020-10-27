@@ -18,6 +18,7 @@ export class BookingService {
   private handlerError(error: HttpErrorResponse){
     console.error('Http error', error);
     return throwError(`Error calling api ${error.message}`);
+    
   }
 
   public postBooking(booking: IBooking): Observable<IBookingResponse> {

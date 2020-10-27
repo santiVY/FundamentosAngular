@@ -1,8 +1,11 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/services/booking/booking.service';
 import { IBooking } from 'src/app/shared/models/booking.model';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-form-booking',
@@ -57,9 +60,6 @@ export class FormBookingComponent implements OnInit {
     let arrayDateStart = dateStar.split('-');
     let arrayDateEnd = dateEnd.split('-');
 
-    console.log('fecha inicio', arrayDateStart)
-    console.log('fecha final', arrayDateEnd)
-
     if(parseInt(arrayDateEnd[0]) < parseInt(arrayDateStart[0])){
       errors = { dateStartError: 'El año debe ser mayor o igual al año inicio'};
     }else if(parseInt(arrayDateEnd[0]) === parseInt(arrayDateStart[0]) && parseInt(arrayDateEnd[1]) < parseInt(arrayDateStart[1])) {
@@ -105,15 +105,15 @@ export class FormBookingComponent implements OnInit {
     this.bookingService.postBooking(data).subscribe(
        response => {
          if(response.status === 1){
-            alert('Reserva exitosa');
-            console.log('reserva exitosa', response);
-            this.router.navigate(['/home']);
+          Swal.fire("Exitosa!", "Reserva realizada!", "success");
+          console.log('reserva exitosa', response);
+          this.router.navigate(['/home']);
          }else{
-           alert('token no valido');
+          Swal.fire("Error!", "Token no valido!", "error");
+          this.router.navigate(['/signin']);
          }
        }
      );
   }
-
 
 }
