@@ -1,0 +1,13 @@
+@import '/src/styles/variables.scss';
+
+.registrarse {
+    text-decoration: none;
+    outline: none;
+    color: $hof-color;
+    font-size: 1em;
+    &:hover{
+        color: $rausch-color;
+        font-size: 1.05em;
+        transition: 1s;
+    }
+}

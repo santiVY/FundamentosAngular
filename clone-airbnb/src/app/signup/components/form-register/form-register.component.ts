@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/models/user.model';
 import { IUserRegisterResponse } from 'src/app/shared/models/userRegisterResponse.model';
+import Swal from 'sweetalert2';
 import { UserService } from '../../../services/users/users.service'
 
 @Component({
@@ -81,7 +82,8 @@ export class FormRegisterComponent implements OnInit {
     const data: IUser = this.formGroupRegister.value;
       this.userService.addUser(data).subscribe(response => {
         this.userRegister = response;
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/home']);
+        Swal.fire('Exitoso','Registro exitoso','success')
         console.log('Datos de registro ', response) 
     });
   }

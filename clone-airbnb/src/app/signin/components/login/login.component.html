@@ -8,6 +8,7 @@
             <label>Contraseña:</label>
             <input formControlName="password" type="password" name="pasword">
         </div>
+        <a class="registrarse" [routerLink]="['/signup']">Registrarse</a>
         <button (click)="login()" [disabled]="formGroupLogin.invalid">Iniciar sesión</button>
     </form>
 </section>

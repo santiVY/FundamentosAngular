@@ -13,6 +13,7 @@ import { IUserRegisterResponse } from 'src/app/shared/models/userRegisterRespons
 export class UserService {
 
   private urlAPI: string = environment.urlBase;
+  private isLogged: boolean = false;
   
   constructor(private httpClient: HttpClient) { }
 
@@ -33,6 +34,11 @@ export class UserService {
     return this.httpClient.post<IUserLoginResponse>(url, user).pipe(
       retry(2), catchError(this.handlerError)
     );
+  }
+
+  public isLoggedUser():boolean{
+    this.isLogged = localStorage.getItem('Token') ? true : false;
+    return this.isLogged;
   }
 
 

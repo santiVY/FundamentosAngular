@@ -1,4 +1,3 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,13 +28,15 @@ export class FormBookingComponent implements OnInit {
   private formBookingInit():void {
     this.formGroupBooking = this.formBuilder.group({
       booking_date_start: ['', [Validators.required, this.validateDate]],
-      booking_date_end: ['', [Validators.required, this.validateDateEnd]],
+      booking_date_end: ['', [Validators.required]],
       comments: ['', Validators.required]
+    }, {
+      validators: this.validateDateRange()
     });
   }
 
   public validateDate(control: AbstractControl){
-  
+
     const date = control.value;
     localStorage.setItem('dateStart', date);
     const dateNow = new Date();
@@ -53,23 +54,18 @@ export class FormBookingComponent implements OnInit {
     return errors;
   }
 
-  public validateDateEnd(control: AbstractControl){
-    let dateEnd = control.value;
-    let dateStar = localStorage.getItem('dateStart');
-    let errors = null;
-    let arrayDateStart = dateStar.split('-');
-    let arrayDateEnd = dateEnd.split('-');
-
-    if(parseInt(arrayDateEnd[0]) < parseInt(arrayDateStart[0])){
-      errors = { dateStartError: 'El año debe ser mayor o igual al año inicio'};
-    }else if(parseInt(arrayDateEnd[0]) === parseInt(arrayDateStart[0]) && parseInt(arrayDateEnd[1]) < parseInt(arrayDateStart[1])) {
-      errors = { dateStartError: 'El mes debe ser mayor o igual al mes inicio'};
-    }else if(parseInt(arrayDateEnd[0]) === parseInt(arrayDateStart[0]) && parseInt(arrayDateEnd[1]) === parseInt(arrayDateStart[1]) && parseInt(arrayDateEnd[2]) < parseInt(arrayDateStart[2])){
-      errors = { dateStartError: 'El dia debe ser mayor o igual al dia inicio'};
+  private validateDateRange() {
+    return (formGroup: FormGroup) => {
+      const controlBookingDateStart = formGroup.controls['booking_date_start'];
+      const controlBookingDateEnd = formGroup.controls['booking_date_end'];
+      if(new Date(controlBookingDateStart.value) > new Date(controlBookingDateEnd.value)) {
+        controlBookingDateEnd.setErrors({
+          mustGreaterThan: true
+        });
+      }
     }
-
-    return errors;
   }
+
 
   public getError (controlName: string) {
     let error = '';
@@ -95,25 +91,53 @@ export class FormBookingComponent implements OnInit {
     if(errors.dateEndError){
       errorMessage += errors.dateEndError;
     }
+
+    if(errors.mustGreaterThan){
+      errorMessage += 'Fecha final debe ser mayor o igual a la fecha de inicio de reserva'
+    }
     
     return errorMessage;
   }
 
   public bookingNow(): void {
+ 
     const data: IBooking = this.formGroupBooking.value;
     data.experience_id = localStorage.getItem("experiences_id");
     this.bookingService.postBooking(data).subscribe(
-       response => {
-         if(response.status === 1){
+      response => {
+        if(response.status === 1){
           Swal.fire("Exitosa!", "Reserva realizada!", "success");
           console.log('reserva exitosa', response);
           this.router.navigate(['/home']);
-         }else{
-          Swal.fire("Error!", "Token no valido!", "error");
-          this.router.navigate(['/signin']);
-         }
-       }
-     );
+        }
+      });
+    }
   }
 
-}
+  // public validateDate(control: AbstractControl){
+  //   let errors = null;
+  //   if(new Date() > new Date(control.value)){
+  //     errors = { dateStartError: 'El fecha debe ser mayor o igual a la fecha actual'};
+  //   }
+  //   return errors;
+  // }
+
+  // public validateDateEnd(control: AbstractControl){
+  //   let dateEnd = control.value;
+  //   let dateStar = localStorage.getItem('dateStart');
+  //   let errors = null;
+  //   let arrayDateStart = dateStar.split('-');
+  //   let arrayDateEnd = dateEnd.split('-');
+
+  //   if(parseInt(arrayDateEnd[0]) < parseInt(arrayDateStart[0])){
+  //     errors = { dateStartError: 'El año debe ser mayor o igual al año inicio'};
+  //   }else if(parseInt(arrayDateEnd[0]) === parseInt(arrayDateStart[0]) && parseInt(arrayDateEnd[1]) < parseInt(arrayDateStart[1])) {
+  //     errors = { dateStartError: 'El mes debe ser mayor o igual al mes inicio'};
+  //   }else if(parseInt(arrayDateEnd[0]) === parseInt(arrayDateStart[0]) && parseInt(arrayDateEnd[1]) === parseInt(arrayDateStart[1]) && parseInt(arrayDateEnd[2]) < parseInt(arrayDateStart[2])){
+  //     errors = { dateStartError: 'El dia debe ser mayor o igual al dia inicio'};
+  //   }
+
+  //   return errors;
+  // }
+
+
